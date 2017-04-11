@@ -10,7 +10,8 @@ struct node{
 
 
 void displayll(struct node *head);
-void Push(struct node** headRef, int newData); 
+void PushE(struct node** headRef, int newData);
+void PushS(struct node** headRef, int newData);
 void InsertNthTest(void);
 void InsertNth(struct node** headRef, int index, int num);
 int Length(struct node** head);
@@ -42,7 +43,7 @@ void InsertNthTest(){
   struct node* myList =BuildOneTwoThree();
   printf("The created Linked list contains ");
   displayll(head);
-  InsertNth(&head,0,6);
+  InsertNth(&head,4,6);
   printf("The modified linked List\n");
   displayll(head);
   
@@ -53,13 +54,13 @@ struct node* BuildOneTwoThree(){
 
   int i;
   for(i=1;i<4;i++)
-    Push(&head,i);
+    PushS(&head,i);
   return(head);
 }
 
 // This Push function adds elements of int type to the end of the List.
 
-void Push(struct node** headRef, int newData){
+void PushE(struct node** headRef, int newData){
   struct node *newNode;
   struct node *current= *headRef;
   newNode = (struct node*)malloc(sizeof(struct node));
@@ -83,7 +84,15 @@ void Push(struct node** headRef, int newData){
   }
 }
 
+// This push function adds elememnts to the start of the linked list.
+void PushS(struct node** headRef, int newData){
 
+  struct node* current = *headRef,*newNode;
+  newNode = (struct node*)malloc(sizeof(struct node));
+  newNode->data  = newData;
+  newNode->next = head;
+  head = newNode;
+}
 
 // returns the length of the Linked List.
 int Length(struct node** headRef){
@@ -101,21 +110,17 @@ void InsertNth(struct node** headRef, int index, int num){
   struct node* current = *headRef,*previous,*temp,*newNode;
   int len=Length(&current)+1,link_count=-1;
   
-  /* if(len+1 < index ){
+   if(len < index ){
 
     printf("Insertion not possible, index out of range\nExiting.....\n");
     exit(0);
-    }*/
+    }
   printf("len %d index %d\n",len,index);
   
   if(len== index){
-    Push(&head,num);
+    PushE(&head,num);
   }else if(index ==0){
-    temp = current;
-    newNode = (struct node*)malloc(sizeof(struct node));
-    newNode->data = num;
-    newNode->next = temp->next;
-    head = newNode;
+    PushS(&head,num);
     
     
   }else{
