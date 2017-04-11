@@ -102,7 +102,7 @@ int Pop(struct node** headRef){
   struct node* previous;
   int length = Length(&current); // get the length of the linked list.
   int value;
-  if(length == 1){ // an empty linked list
+  if(length == 0){ // an empty linked list
 
     printf("Error: nothing to pop\nExiting......\n");
     exit(0);
@@ -129,7 +129,7 @@ int Length(struct node** headRef){
   if(*headRef == NULL)
     return(0);
   struct node* current = *headRef;
-  int len=1;
+  int len=0;
   for(;current->next != NULL ;current = current->next)
     len++;
   return(len);
