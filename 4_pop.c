@@ -41,7 +41,7 @@ void displayll(struct node* head){
   }
 }
 
-// call the getnth function which returns the position of an element in the List
+// call the pop function which returns the first of an element and removes it from the List
 void PopTest(){
 
   struct node* myList =BuildOneTwoThree();
