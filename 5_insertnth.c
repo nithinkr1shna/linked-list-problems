@@ -37,6 +37,7 @@ void displayll(struct node* head){
   }
 }
 
+
 // call the InsertNth function which which adds an elemnt to the specified index position the List
 void InsertNthTest(){
 
@@ -49,7 +50,7 @@ void InsertNthTest(){
   
 }
 
-// function responsible for building the Linked List {123}
+// function responsible for building the Linked List {321}
 struct node* BuildOneTwoThree(){
 
   int i;
@@ -84,6 +85,7 @@ void PushE(struct node** headRef, int newData){
   }
 }
 
+
 // This push function adds elememnts to the start of the linked list.
 void PushS(struct node** headRef, int newData){
 
@@ -93,6 +95,7 @@ void PushS(struct node** headRef, int newData){
   newNode->next = head;
   head = newNode;
 }
+
 
 // returns the length of the Linked List.
 int Length(struct node** headRef){
@@ -110,16 +113,15 @@ void InsertNth(struct node** headRef, int index, int num){
   struct node* current = *headRef,*previous,*temp,*newNode;
   int len=Length(&current)+1,link_count=-1;
   
-   if(len < index ){
+  if(len < index ){ //if index greater than length of linked list plus one
 
     printf("Insertion not possible, index out of range\nExiting.....\n");
     exit(0);
     }
-  printf("len %d index %d\n",len,index);
   
-  if(len== index){
+  if(len== index){ // if length of linked list is equal to index , then add the element to end of the list using PushE
     PushE(&head,num);
-  }else if(index ==0){
+  }else if(index ==0){ // if index is 0 element is added to the head position using PushS function.
     PushS(&head,num);
     
     
