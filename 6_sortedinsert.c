@@ -8,7 +8,7 @@ struct node{
 };
 
 
-
+void print(int num);
 void displayll(struct node *head);
 void PushE(struct node** headRef, int newData);
 void PushS(struct node** headRef, int newData);
@@ -16,7 +16,7 @@ void SortedInsertTest(void);
 void SortedInsert(struct node** headRef,int num);
 void InsertNth(struct node** headRef, int index, int num);
 int Length(struct node** head);
-
+int last(struct node** headRef);
 
 struct node *head = NULL; // declared globally
 
@@ -42,15 +42,15 @@ void displayll(struct node* head){
 // call the SortedInsert function which which adds an elemnt to the specified index position the List acc to the order.
 void SortedInsertTest(){
 
-  printf("The created Linked list contains ");
+  printf("\nThe created Linked list contains ");
   InsertNth(&head,0,6);
   InsertNth(&head,1,9);
   InsertNth(&head,2,11);
   InsertNth(&head,3,14);
-  printf("The modified linked List\n");
   displayll(head);
+  printf("The numbers that are added to the list are : 4 10 12 15\n");
+  printf("\nThe modified linked List\n");
   SortedInsert(&head,4);
-  displayll(head);
   SortedInsert(&head,10);
   displayll(head);
   SortedInsert(&head,12);
@@ -132,7 +132,7 @@ void InsertNth(struct node** headRef, int index, int num){
     for(;current->next;current= current->next){
 
       link_count++;
-      printf("%d\t\n",link_count);
+      
       if(link_count==index){
 	break;
       }
@@ -147,24 +147,52 @@ void InsertNth(struct node** headRef, int index, int num){
   
 }
 
+
 void SortedInsert(struct node** headRef, int num){
 
-  struct node* current = *headRef,*previous;
-  int count =0,len = Length(&head);
+  struct node* current = *headRef,*previous,*newNode;
+  int len = Length(&current)+1,count=0;
+ 
+  for(;current->next;current=current->next,count++){
+    
+    
+    if(num < current->data && count==0){ // insert first
+	PushS(&head,num);
+	break;
 
-  for(;current->next;current=current->next){
-
-    if(num < current->data && count ==0 ){
-      PushS(&head,num);
     }
-
-   
-    count++;
-    printf("%d %d\n",count,len);
-    if(count == len+1){
+      if(num < current->data){ // insert in between
+      newNode= (struct node*)malloc(sizeof(struct node));
+      newNode->data = num;
+      newNode->next = previous->next;
+      previous->next = newNode;
+      break;
+    }
+    
+    if(num >last(&head)){ // num is greater than the last element then add the number to the end of the list.
       PushE(&head,num);
+      break;
     }
-  
+    if(num > current->data && len==(count+2)  ){ // add element to second last position.
+      InsertNth(&head,len-1,num);
+      break;
+       
+      }
+    
+    previous=current;     
+   
   }
+  
   printf("\n");
 }
+
+int last(struct node** headRef){
+
+  struct node* current = *headRef;
+  while(current->next !=NULL){
+    current= current->next;
+  }
+  return(current->data);
+}
+
+
