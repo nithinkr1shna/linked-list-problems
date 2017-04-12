@@ -147,6 +147,7 @@ void InsertNth(struct node** headRef, int index, int num){
   
 }
 
+// Adds elements to the sorted Linked List in increasing order
 
 void SortedInsert(struct node** headRef, int num){
 
@@ -156,7 +157,7 @@ void SortedInsert(struct node** headRef, int num){
   for(;current->next;current=current->next,count++){
     
     
-    if(num < current->data && count==0){ // insert first
+    if(num < current->data && count==0){ // insert node if the num is less than the first node
 	PushS(&head,num);
 	break;
 
@@ -186,6 +187,8 @@ void SortedInsert(struct node** headRef, int num){
   printf("\n");
 }
 
+// this functio is an auxilliary function used by sortedinsert fn
+// returns the last node data in the linked list.
 int last(struct node** headRef){
 
   struct node* current = *headRef;
