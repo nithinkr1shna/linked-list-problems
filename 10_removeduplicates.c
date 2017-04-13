@@ -1,7 +1,4 @@
-//THIS PROGRAM SPLITS A LINKED LIST INTO TWO SUB LISTS
-
-//If the number of elements is even the sublists contain equal number
-//of elements else the second sublist contain one plus the first sublist.
+//THIS PROGRAM WHICH REMOVES DUPLICATES FROM A LINKED LIST
 
 
 #include<stdio.h>
