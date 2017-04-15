@@ -42,22 +42,24 @@ void createnodes(void){
   
   printf("The modified lists is:\n");
   mergeSort(&source1);
-  // displayll(source1);
+  displayll(source1);
   
   
 }
 
 void mergeSort(struct node** headRef){
 
-  struct node* head =*headRef,*a,*b,*result;
-  if(head == NULL)
+  struct node* head =*headRef,*a=NULL,*b=NULL,*result;
+  if(head == NULL || head->next == NULL)
     return;
   
   frontbacksplit(&head,&a,&b);
+  displayll(a);
+  displayll(b);
   mergeSort(&a);
   mergeSort(&b);
-  result = sortedMerge(a,b);
-  displayll(result);
+  *headRef = sortedMerge(a,b);
+  
 
 
 
@@ -82,6 +84,7 @@ void moveNodes(struct node** list1Ref, struct node** list2Ref){
     printf("no more node to move\n");
   }
 }
+
 
   void frontbacksplit(struct node** sourceRef, struct node** frontRef, struct node** backRef){
 
